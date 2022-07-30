@@ -11,7 +11,7 @@ public class RddBasicOperations {
 
     public static void javaRddDemo(JavaSparkContext javaSparkContext) {
 
-        JavaRDD<String> stringJavaRDD = javaSparkContext.textFile("file:///C:/Users/lenovo/IdeaProjects/MySpark/src/main/resources/Customer.csv");
+        JavaRDD<String> stringJavaRDD = javaSparkContext.textFile("file:///C:/Users/lenovo/IdeaProjects/MySpark/src/main/resources/Employee.csv");
 
         //print all records including header
         stringJavaRDD.foreach(t -> System.out.println(t));
