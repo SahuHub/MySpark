@@ -4,16 +4,12 @@ import domain.Customer;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
-import org.apache.spark.api.java.function.MapFunction;
 import org.apache.spark.storage.StorageLevel;
-
-import java.util.Arrays;
-import java.util.Iterator;
 
 public class DDDApproach {
 
     //domain driven design
-    public static void example(JavaSparkContext javaSparkContext){
+    public static void example(JavaSparkContext javaSparkContext) {
 
         JavaRDD<String> stringJavaRDD = javaSparkContext.textFile("file:///C:/Users/lenovo/IdeaProjects/MySpark/src/main/resources/Customer.csv");
 
