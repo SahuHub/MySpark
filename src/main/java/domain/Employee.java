@@ -9,7 +9,7 @@ public class Employee implements Serializable, Comparable<Employee> {
     private String name;
     private int age;
 
-    private int dept;
+    private int deptId;
     private int salary;
 
     public void setEmpId(int empId) {
@@ -37,12 +37,12 @@ public class Employee implements Serializable, Comparable<Employee> {
     }
 
 
-    public int getDept() {
-        return dept;
+    public int getDeptId() {
+        return deptId;
     }
 
-    public void setDept(int dept) {
-        this.dept = dept;
+    public void setDeptId(int deptId) {
+        this.deptId = deptId;
     }
 
     public int getSalary() {

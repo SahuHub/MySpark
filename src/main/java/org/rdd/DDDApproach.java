@@ -15,13 +15,13 @@ public class DDDApproach {
     //domain driven design
     public static void example(JavaSparkContext javaSparkContext) {
 
-        JavaRDD<String> employeeRDD = javaSparkContext.textFile("file:///C:/Users/lenovo/IdeaProjects/MySpark/src/main/resources/Employee.csv");
+        JavaRDD<String> empRDD = javaSparkContext.textFile("file:///C:/Users/lenovo/IdeaProjects/MySpark/src/main/resources/Employee.csv");
         JavaRDD<String> deptRDD = javaSparkContext.textFile("file:///C:/Users/lenovo/IdeaProjects/MySpark/src/main/resources/Department.csv");
 
         //remove header and empty from data
-        JavaRDD<String> employeeWithoutHeader = getCleanRDD(employeeRDD);
+        JavaRDD<String> employeeWithoutHeader = getCleanRDD(empRDD);
         JavaRDD<String> departmentWithoutHeader = getCleanRDD(deptRDD);
-        JavaRDD<Employee> employeeRDDWithoutJunk = employeeWithoutHeader.map(new Function<String, Employee>() {
+        JavaRDD<Employee> employeeRDD = employeeWithoutHeader.map(new Function<String, Employee>() {
             @Override
             public Employee call(String s) throws Exception {
 
@@ -30,7 +30,7 @@ public class DDDApproach {
                 customer.setEmpId(Integer.parseInt(split[0]));
                 customer.setName(split[1]);
                 customer.setAge(Integer.parseInt(split[2]));
-                customer.setDept(Integer.parseInt(split[3]));
+                customer.setDeptId(Integer.parseInt(split[3]));
                 customer.setSalary(Integer.parseInt(split[4]));
                 return customer;
             }
@@ -48,11 +48,25 @@ public class DDDApproach {
             }
         });
 
-        //findUniqueEmployees(employeeRDDWithoutJunk);
-        //findTop3SalaryOfEmp(employeeRDDWithoutJunk);
-        wordCountExample(employeeRDD);
+        //findUniqueEmployees(employeeRDD);
+        //findTop3SalaryOfEmp(employeeRDD);
+        //wordCountExample(empRDD);
+        findNameWithDept(employeeRDD,departmentRDD);
+
+
     }
 
+    private static void findNameWithDept(JavaRDD<Employee> emp,JavaRDD<Department> dept){
+
+
+        JavaPairRDD<Integer, Employee> empPairRDD = emp.mapToPair(t -> new Tuple2<Integer, Employee>(new Integer(t.getDeptId()), t));
+        JavaPairRDD<Integer, Department> deptPairRDD = dept.mapToPair(t -> new Tuple2<Integer, Department>(new Integer(t.getDeptId()), t));
+
+        JavaPairRDD<Integer, Tuple2<Employee, Department>> join = empPairRDD.join(deptPairRDD);
+
+        join.values().foreach(t-> System.out.println(t._1.getName() + " works in " + t._2.getDeptName()));
+
+    }
     private static void findTop3SalaryOfEmp(JavaRDD<Employee> emp) {
 
         //implemented comparable interface in Employee class
