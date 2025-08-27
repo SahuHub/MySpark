@@ -17,12 +17,21 @@ object Main {
       .option("inferSchema", "true")   // infer column data types
       .csv("src/main/resources/Employee.csv")
 
+
+    // ✅ Read CSV file (with header, infer schema)
+    var deptDF = spark.read
+      .option("header", "true")        // first row has column names
+      .option("inferSchema", "true")   // infer column data types
+      .csv("src/main/resources/Department.csv")
+
     empDF = empDF.na.drop("all")
     // ✅ Show data
     empDF.show(10)
+    deptDF.show(10)
 
     // ✅ Print schema
     empDF.printSchema()
+    deptDF.printSchema()
 
     // Stop Spark
     spark.stop()
