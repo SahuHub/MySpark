@@ -15,8 +15,8 @@ public class DDDApproach {
     //domain driven design
     public static void example(JavaSparkContext javaSparkContext) {
 
-        JavaRDD<String> empRDD = javaSparkContext.textFile("file:///C:/Users/lenovo/IdeaProjects/MySpark/src/main/resources/Employee.csv");
-        JavaRDD<String> deptRDD = javaSparkContext.textFile("file:///C:/Users/lenovo/IdeaProjects/MySpark/src/main/resources/Department.csv");
+        JavaRDD<String> empRDD = javaSparkContext.textFile("file:///C:/Users/Ashish/IdeaProjects/MySpark/src/main/resources/Employee.csv");
+        JavaRDD<String> deptRDD = javaSparkContext.textFile("file:///C:/Users/Ashish/IdeaProjects/MySpark/src/main/resources/Department.csv");
 
         //remove header and empty from data
         JavaRDD<String> employeeWithoutHeader = getCleanRDD(empRDD);

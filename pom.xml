@@ -22,10 +22,12 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spark.version>3.0.0</spark.version>
-        <spark.scala.version>2.12</spark.scala.version>
+        <spark.version>4.0.0</spark.version>
+        <spark.scala.version>2.13</spark.scala.version>
         <hadoop.version>2.7.3</hadoop.version>
     </properties>
+
+
 
     <dependencies>
     <dependency>
@@ -39,13 +41,6 @@
         <artifactId>spark-sql_${spark.scala.version}</artifactId>
         <version>${spark.version}</version>
     </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.netty/netty-common -->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-common</artifactId>
-            <version>4.1.77.Final</version>
-        </dependency>
 
         <!-- for hive -->
     <dependency>
